@@ -1,0 +1,62 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Test",
+            "detail": "Execute the selected test suites",
+            "type": "shell",
+            "command": "npm run ${input:testSuite}"
+        },
+        {
+            "label": "CLI",
+            "detail": "Execute the selected CLI tool",
+            "type": "shell",
+            "command": "bash scripts/run_cli.sh ${input:cliTool}",
+            "runOptions": {
+                "instanceLimit": 10
+            }
+        },
+        {
+            "label": "Watch App",
+            "detail": "Start the Nest development server and watch for file changes",
+            "type": "shell",
+            "command": "npm run watch:app"
+        },
+        {
+            "label": "Watch Test",
+            "detail": "Run Jest tests and watch for file changes",
+            "type": "shell",
+            "command": "npm run watch:test"
+        },
+        {
+            "label": "Workspace Cleanup",
+            "detail": "Reset the development environment and remove all data",
+            "type": "shell",
+            "command": "bash scripts/workspace_cleanup.sh"
+        }
+    ],
+    "inputs": [
+        {
+            "id": "testSuite",
+            "type": "pickString",
+            "default": "test:app",
+            "options": [
+                "test:all",
+                "test:app",
+                "test:common"
+            ],
+            "description": "Select a test suite to run"
+        },
+        {
+            "id": "cliTool",
+            "type": "pickString",
+            "options": [
+                "redis",
+                "mongo"
+            ],
+            "description": "Select the CLI tool to execute"
+        }
+    ]
+}
